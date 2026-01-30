@@ -19,9 +19,9 @@ function Navbar() {
             <div className="nav-left">LOGO</div>
 
             <nav className="nav-right">
-                <a href="#">Pricing</a>
+               {/* <a href="#">Pricing</a>
                 <a href="#">Templates</a>
-                <a href="#">Log in</a>
+                <a href="#">Log in</a>*/}
                 <button className="btn primary">Get Started</button>
             </nav>
         </header>
