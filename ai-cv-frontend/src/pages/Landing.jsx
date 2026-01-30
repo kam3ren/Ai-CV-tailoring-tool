@@ -17,6 +17,7 @@ function Navbar() {
     return (
         <header className="navbar">
             <div className="nav-left">LOGO</div>
+
             <nav className="nav-right">
                 <a href="#">Pricing</a>
                 <a href="#">Templates</a>
@@ -26,6 +27,7 @@ function Navbar() {
         </header>
     );
 }
+
 
 
 function Hero() {

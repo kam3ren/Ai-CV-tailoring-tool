@@ -1,19 +1,129 @@
-/* Page */
+/* =========================
+   GLOBAL RESET & BASE
+========================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+}
+
+/* =========================
+   FLUID TYPOGRAPHY SCALE
+========================= */
+
+:root {
+    --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+    --text-sm: clamp(0.85rem, 0.8rem + 0.3vw, 0.95rem);
+    --text-md: clamp(1rem, 0.95rem + 0.4vw, 1.1rem);
+    --text-lg: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    --text-xl: clamp(2rem, 4vw, 3rem);
+}
+
+/* =========================
+   UNIVERSAL CONTAINER
+========================= */
+
+.container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+/* =========================
+   PAGE
+========================= */
+
 .page {
     color: #2563eb;
     max-width: 100%;
-    overflow-x: hidden;
+    
 }
 
-/* Subtitle */
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 64px;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nav-left {
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: #2563eb;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #64748b;
+    font-size: var(--text-sm);
+    transition: color 0.15s ease;
+}
+
+.nav-right a:hover {
+    color: #2563eb;
+}
+
+.nav-right .btn.primary {
+    padding: 0.55rem 1rem;
+    font-size: var(--text-sm);
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+    padding: clamp(3rem, 6vw, 5rem) 1rem;
+}
+
 .subtitle {
     margin-top: 1.5rem;
     color: #64748b;
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    font-size: var(--text-md);
     line-height: 1.6;
 }
 
-/* Hero actions */
 .hero-actions {
     margin-top: 2.5rem;
     display: flex;
@@ -22,11 +132,14 @@
     flex-wrap: wrap;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
+
 .btn {
     border-radius: 8px;
     padding: 0.7rem 1.2rem;
-    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    font-size: var(--text-sm);
     cursor: pointer;
     border: 1px solid transparent;
     white-space: nowrap;
@@ -43,17 +156,26 @@
     color: #1e3a8a;
 }
 
-/* Features grid */
+/* =========================
+   FEATURES GRID
+========================= */
+
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(260px, 100%), 1fr)
+    );
+    gap: clamp(1.25rem, 4vw, 2rem);
     max-width: 1000px;
     margin: clamp(2.5rem, 6vw, 4rem) auto;
     padding: 0 clamp(1rem, 4vw, 1.5rem);
 }
 
-/* Feature cards */
+/* =========================
+   FEATURE CARDS
+========================= */
+
 .feature-card {
     background: white;
     border: 1px solid #e5e7eb;
@@ -68,13 +190,15 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-/* Icons */
 .icon {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-/* Footer */
+/* =========================
+   FOOTER
+========================= */
+
 .footer {
     border-top: 1px solid #e5e7eb;
     padding: clamp(1.5rem, 4vw, 2rem);
@@ -83,11 +207,30 @@
     gap: 1.5rem;
     justify-content: space-between;
     color: #64748b;
-    font-size: 0.85rem;
+    font-size: var(--text-xs);
 }
 
 .footer-links a {
     margin-right: 1rem;
     text-decoration: none;
     color: inherit;
+}
+
+/* =========================
+   MOBILE BREAKPOINT
+========================= */
+
+@media (max-width: 768px) {
+    .nav-right a {
+        display: none;
+    }
+
+    .nav-right {
+        gap: 0.75rem;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
