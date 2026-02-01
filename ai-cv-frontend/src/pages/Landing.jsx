@@ -1,4 +1,6 @@
 import "./landing.css";
+import CVUpload from "../components/CVUpload";
+import JobDescription from "../components/JobDescription";
 
 
 export default function Landing() {
@@ -6,7 +8,14 @@ export default function Landing() {
         <div className="page">
             <Navbar />
             <Hero />
-            <Features />
+                <Features />
+
+                <main className="content">
+                    <div className="split">
+                        <CVUpload />
+                        <JobDescription />
+                    </div>
+                </main>
             <Footer />
         </div>
     );
