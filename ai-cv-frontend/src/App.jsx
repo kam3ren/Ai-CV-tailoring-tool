@@ -1,12 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Landing from "./pages/Landing";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Upload from './pages/Upload';
 
 function App() {
-  return <Landing />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/upload" element={<Upload />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
-

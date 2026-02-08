@@ -1,0 +1,64 @@
+/* =========================
+   UPLOAD PAGE LAYOUT
+========================= */
+
+.split {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+    align-items: flex-start;
+}
+
+.split .cv-upload {
+    flex: 1;
+    max-width: 550px;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.split .cv-upload .upload-dropzone {
+    display: block;
+    width: 100%;
+}
+
+.split .job-desc {
+    flex: 1.5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.split .job-desc .job-textarea {
+    flex: 1;
+    min-height: 450px;
+    resize: vertical;
+}
+
+@media (max-width: 900px) {
+    .split {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .split .cv-upload {
+        max-width: 100%;
+        aspect-ratio: auto;
+        min-height: 300px;
+    }
+    
+    .split .job-desc {
+        min-height: auto;
+    }
+    
+    .split .job-desc .job-textarea {
+        min-height: auto;
+    }
+}

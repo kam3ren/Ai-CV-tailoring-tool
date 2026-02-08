@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './components.css';
 
-export default function Navbar() {
+export default function Navbar({ actionButton }) {
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
@@ -20,7 +20,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="nav-left">AI CV Tool</div>
             <div className="nav-right">
-                
+                {actionButton}
                 <label className="switch" aria-label="Toggle Dark Mode">
                     <input type="checkbox" checked={isDarkMode} onChange={() => setIsDarkMode(!isDarkMode)} />
                     <span className="slider"></span>

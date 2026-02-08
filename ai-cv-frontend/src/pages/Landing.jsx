@@ -1,8 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "./landing.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-//import CVUpload from "../components/CVUpload";
-//import JobDescription from "../components/JobDescription";
+
 
 
 export default function Landing() {
@@ -13,18 +13,16 @@ export default function Landing() {
                 <Features />
 
                 <main className="content">
-                    {/* <div className="split">
-                        <CVUpload />
-                        <JobDescription />
-                    </div> */}
+                    {}
                 </main>
             <Footer />
         </div>
     );
 }
 
-//NEED TO MAKE CHANGES HERE TO THE TITLE
+
 function Hero() {
+    const navigate = useNavigate();
     return (
         <section className="hero">
 
@@ -40,7 +38,7 @@ function Hero() {
                 Upload your CV, paste the job description, and generate a tailored CV in seconds.
             </p>
             <div className="hero-actions">
-                <button className="btn primary">Tailor My CV Now →</button>
+                <button className="btn primary" onClick={() => navigate('/upload')}>Tailor My CV Now →</button>
             </div>
         </section>
     );

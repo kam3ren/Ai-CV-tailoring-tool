@@ -1,28 +1,184 @@
 /* Shared basic styles for all (constant) Components */
-.cv-upload, .job-desc {
-  border: 1px dashed #d1d5db;
-  padding: 18px;
-  border-radius: 8px;
-  background: #fff;
-  margin: 18px 0;
+/* =========================
+   UPLOAD / CARD CONTAINERS
+========================= */
+
+.cv-upload,
+.job-desc {
+  border: 1px solid #e5e7eb;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: #ffffff;
+  margin: 1.25rem 0;
 }
 
-.cv-upload h2, .job-desc h2 { margin: 0 0 12px 0; }
+/* Headings */
+.cv-upload h2,
+.job-desc h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+}
 
-.upload-box { display: flex; gap: 12px; align-items: center; }
-.upload-meta { margin-top: 8px; color: #333; }
-.status { margin-top: 6px; color: #2563eb; }
-.preview pre { max-height: 160px; overflow: auto; background: #f8fafc; padding: 10px; border-radius: 6px; }
+/* =========================
+   UPLOAD DROPZONE
+========================= */
 
-.job-textarea { width: 100%; font-family: inherit; padding: 10px; border-radius: 6px; border: 1px solid #e5e7eb; }
-.job-actions { margin-top: 8px; display:flex; gap:8px }
-.keywords { margin-top: 12px; }
-.kw-list { display:flex; gap:8px; flex-wrap:wrap }
-.kw { background:#eef2ff; color:#1e3a8a; padding:6px 10px; border-radius:999px; font-size:0.9rem }
+.upload-dropzone {
+  margin-top: 0.75rem;
+  border: 2px dashed #cbd5f5;
+  border-radius: 10px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
 
-.btn { padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; }
-.btn.primary { background: #0ea5e9; color: white }
-.btn.secondary { background: #e6edf3; color: #0f172a }
+.upload-dropzone:hover {
+  background: #f8fafc;
+  border-color: #93c5fd;
+}
+
+.upload-dropzone.dragging {
+  background: #eff6ff;
+  border-color: #2563eb;
+  animation: border-pulse 1.5s infinite;
+}
+
+/* Icon */
+.upload-icon {
+  font-size: 1.4rem;
+  color: #0ea5e9;
+  margin-bottom: 0.5rem;
+}
+
+/* Text */
+.upload-text {
+  font-size: 0.85rem;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.upload-hint {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Selected file */
+.upload-selected {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+/* =========================
+   META / STATUS
+========================= */
+
+.upload-meta {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+.status {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #2563eb;
+}
+
+/* =========================
+   JOB DESCRIPTION
+========================= */
+
+.job-textarea {
+  width: 100%;
+  font-family: inherit;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.85rem;
+  resize: vertical;
+}
+
+.job-textarea:focus {
+  outline: none;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+}
+
+.job-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* =========================
+   KEYWORDS
+========================= */
+
+.keywords {
+  margin-top: 1rem;
+}
+
+.kw-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.kw {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn.primary {
+  background: #0ea5e9;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #0284c7;
+}
+
+.btn.primary:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn.secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.btn.secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
 
 
 /* =========================
@@ -274,4 +430,95 @@ body.dark-mode .feature-step {
 
 body.dark-mode .sub-heading {
     color: #f1f5f9;
+}
+
+.remove-file-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    padding: 0 0.25rem;
+}
+
+.remove-file-btn:hover {
+    color: #dc2626;
+}
+
+.char-count {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: right;
+}
+
+/* Dark Mode overrides for new elements */
+body.dark-mode .cv-upload h2,
+body.dark-mode .job-desc h2 {
+    color: #f1f5f9;
+}
+
+body.dark-mode .upload-dropzone {
+    border-color: #475569;
+}
+
+body.dark-mode .upload-dropzone:hover {
+    background-color: #334155;
+    border-color: #60a5fa;
+}
+
+body.dark-mode .upload-text {
+    color: #f1f5f9;
+}
+
+body.dark-mode .upload-hint {
+    color: #94a3b8;
+}
+
+body.dark-mode .upload-icon {
+    color: #38bdf8;
+}
+
+body.dark-mode .btn.secondary {
+    background-color: #334155;
+    color: #f1f5f9;
+}
+
+body.dark-mode .btn.secondary:hover {
+    background-color: #475569;
+}
+
+body.dark-mode .char-count {
+    color: #94a3b8;
+}
+
+body.dark-mode .remove-file-btn {
+    color: #f87171;
+}
+
+body.dark-mode .remove-file-btn:hover {
+    color: #ef4444;
+}
+
+.upload-warning {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: #d97706;
+    text-align: center;
+}
+
+body.dark-mode .upload-warning {
+    color: #fbbf24;
+}
+
+body.dark-mode .upload-dropzone.dragging {
+    background-color: #1e293b;
+    border-color: #60a5fa;
+}
+
+@keyframes border-pulse {
+    0% { border-color: #2563eb; transform: scale(1); }
+    50% { border-color: #60a5fa; transform: scale(1.01); }
+    100% { border-color: #2563eb; transform: scale(1); }
 }

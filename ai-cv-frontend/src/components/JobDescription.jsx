@@ -23,12 +23,11 @@ function extractKeywords(text, limit = 8) {
     .map((t) => t[0]);
 }
 
-export default function JobDescription() {
-  const [text, setText] = useState("");
+export default function JobDescription({ jobDesc, setJobDesc }) {
   const [keywords, setKeywords] = useState([]);
 
   function handleAnalyze() {
-    const ks = extractKeywords(text || "");
+    const ks = extractKeywords(jobDesc || "");
     setKeywords(ks);
   }
 
@@ -37,14 +36,20 @@ export default function JobDescription() {
       <h2>Job Description</h2>
       <textarea
         className="job-textarea"
-        placeholder="Paste a job description here or type a few lines..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        placeholder="Enter the job description you want to tailor your CV for."
+        value={jobDesc}
+        onChange={(e) => setJobDesc(e.target.value)}
         rows={8}
       />
+      <div
+        className="char-count"
+        style={{ color: (jobDesc?.length || 0) < 150 ? "#ef4444" : undefined }}
+      >
+        {jobDesc?.length || 0} characters
+      </div>
       <div className="job-actions">
-        <button className="btn primary" onClick={handleAnalyze}>Analyze</button>
-        <button className="btn secondary" onClick={() => { setText(""); setKeywords([]); }}>Clear</button>
+        <button className="btn primary" onClick={handleAnalyze} disabled={!jobDesc || jobDesc.length < 150}>Analyze</button>
+        <button className="btn secondary" onClick={() => { setJobDesc(""); setKeywords([]); }}>Clear</button>
       </div>
 
       {keywords.length > 0 && (
@@ -52,6 +57,7 @@ export default function JobDescription() {
           <h4>Extracted keywords</h4>
           <div className="kw-list">{keywords.map((k) => <span key={k} className="kw">{k}</span>)}</div>
         </div>
+        
       )}
     </section>
   );

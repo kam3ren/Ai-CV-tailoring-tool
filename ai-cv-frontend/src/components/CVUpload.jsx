@@ -1,56 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./components.css";
 
-export default function CVUpload() {
-  const [fileName, setFileName] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [status, setStatus] = useState(null);
+export default function CVUpload({ file, setFile, storageError }) {
+  const fileInputRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   function handleFileChange(e) {
-    const f = e.target.files[0];
-    if (!f) return;
-    setFileName(f.name);
-    // Try to read text files for a small preview; ignore binary formats
-    const reader = new FileReader();
-    reader.onload = () => setPreview(reader.result.slice(0, 1000));
-    reader.onerror = () => setPreview(null);
-    if (f.type.startsWith("text/") || f.name.endsWith(".md")) {
-      reader.readAsText(f);
-    } else {
-      setPreview(null);
-    }
-    setStatus(null);
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+    setFile(selectedFile);
   }
 
-  function handleUpload() {
-    if (!fileName) {
-      setStatus("Please choose a file first.");
-      return;
+  function handleRemoveFile(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
-    // For now we simulate upload since backend endpoint is not present.
-    setStatus("Uploading...");
-    setTimeout(() => {
-      setStatus("Upload complete (simulated).");
-    }, 800);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    setIsDragging(true);
+  }
+
+  function handleDragLeave(e) {
+    e.preventDefault();
+    // Only cancel dragging if we are leaving the dropzone entirely (not entering a child)
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsDragging(false);
+    }
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setIsDragging(false);
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile) {
+      setFile(droppedFile);
+    }
   }
 
   return (
     <section className="cv-upload">
-      <h2>CV Upload</h2>
-      <div className="upload-box">
-        <input type="file" id="cvfile" onChange={handleFileChange} />
-        <button className="btn primary" onClick={handleUpload}>Upload</button>
-      </div>
+      <h2>Upload Your CV</h2>
+      <p className="upload-subtitle">PDF or DOCX, max 10MB</p>
 
-      <div className="upload-meta">
-        <div><strong>Selected:</strong> {fileName || "No file chosen"}</div>
-        {status && <div className="status">{status}</div>}
-      </div>
+      <label
+        htmlFor="cv-file"
+        className={`upload-dropzone ${isDragging ? "dragging" : ""}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        {file ? (
+          <>
+            <div className="upload-icon">📄</div>
+            <p className="upload-text">
+              <strong>{file.name}</strong>
+              <button
+                type="button"
+                className="remove-file-btn"
+                onClick={handleRemoveFile}
+                title="Remove file"
+              >
+                ✕
+              </button>
+            </p>
+            <span className="upload-hint">Click to replace</span>
+          </>
+        ) : (
+          <>
+            <div className="upload-icon">⬆️</div>
+            <p className="upload-text">
+              <strong>Drop your CV here</strong> or click to browse
+            </p>
+            <span className="upload-hint">Supports PDF and DOCX files</span>
+          </>
+        )}
 
-      {preview && (
-        <div className="preview">
-          <h4>Preview (first 1000 chars)</h4>
-          <pre>{preview}</pre>
+        <input
+          id="cv-file"
+          type="file"
+          accept=".pdf,.doc,.docx"
+          onChange={handleFileChange}
+          hidden
+          ref={fileInputRef}
+        />
+      </label>
+
+      {storageError && (
+        <div className="upload-warning">
+          ⚠️ File too large to save for refresh.
         </div>
       )}
     </section>
