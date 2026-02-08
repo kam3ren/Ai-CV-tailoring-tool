@@ -205,7 +205,7 @@ input:checked + .slider:before {
    DARK MODE & THEME
 ========================= */
 
-/* Default Title Colors (moved from inline styles) */
+/* Default Title Colors */
 .title-part1 { color: #333; }
 .highlight { color: #2563eb; }
 
