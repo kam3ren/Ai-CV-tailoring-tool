@@ -1,6 +1,8 @@
 import "./landing.css";
-import CVUpload from "../components/CVUpload";
-import JobDescription from "../components/JobDescription";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+//import CVUpload from "../components/CVUpload";
+//import JobDescription from "../components/JobDescription";
 
 
 export default function Landing() {
@@ -11,53 +13,34 @@ export default function Landing() {
                 <Features />
 
                 <main className="content">
-                    <div className="split">
+                    {/* <div className="split">
                         <CVUpload />
                         <JobDescription />
-                    </div>
+                    </div> */}
                 </main>
             <Footer />
         </div>
     );
 }
 
-
-function Navbar() {
-    return (
-        <header className="navbar">
-            <div className="nav-left">LOGO</div>
-
-            <nav className="nav-right"> {/*Commented out as not sure if we need it. - Satwik. */}
-                {/* <a href="#">Pricing</a>
-                <a href="#">Templates</a>
-                <a href="#">Log in</a>*/}
-                <button className="btn primary">Get Started</button>
-            </nav>
-        </header>
-    );
-}
-
-
-
+//NEED TO MAKE CHANGES HERE TO THE TITLE
 function Hero() {
     return (
         <section className="hero">
 
             <div className="announcement">
-                <span className="announcement-text"><span className="emoji">✨</span> New: AI 2.0 Engine Released</span>
+                <span className="announcement-text"><span className="emoji">✨</span> AI-Powered CV Optimization</span>
             </div>
 
-            <h1 className="title-part1" style={{ color: '#333' }}>Get more interviews with
+            <h1 className="highlight">Tailor Your CV
                 <br />
-                <span className="highlight" style={{ color: '#2563eb' }}>tailored CVs</span>
+                <span className="title-part1">To A Specific Job</span>
             </h1>
             <p className="subtitle">
-                Our AI analyzes job descriptions to highlight your most relevant skills,
-                keywords, and experiences in seconds. Stop wasting time on manual editing.
+                Upload your CV, paste the job description, and generate a tailored CV in seconds.
             </p>
             <div className="hero-actions">
                 <button className="btn primary">Tailor My CV Now →</button>
-                <button className="btn secondary">See Example</button>
             </div>
         </section>
     );
@@ -67,36 +50,45 @@ function Hero() {
 function Features() {
     return (
         <section className="features">
-            <div className="feature-card">
-                <div className="announcement"> <div className="emoji">⚡</div></div>
-                <h3>AI-Powered</h3>
-                <p>Advanced LLMs understand job nuances better than simple keyword matchers.</p>
-            </div>
-            <div className="feature-card">
-                <div className="announcement"> <div className="emoji">⏱️</div></div>
-                <h3>Save Hours</h3>
-                <p>Generate a perfectly matched CV for every job application in under 30 seconds.</p>
-            </div>
-            <div className="feature-card">
-                <div className="announcement"> <div className="emoji">❤️</div></div>
-                <h3>ATS Friendly</h3>
-                <p>Optimized formats that pass through Applicant Tracking Systems with ease.</p>
+            <h1 className="sub-heading">Steps To Get Closer To Your Next Job</h1>
+            <div className="features-grid">
+                <div className="feature-card">
+                    <div className="feature-icon">⬆️</div>
+                    <span className="feature-step">Step 1</span>
+                    <h3>Upload Your CV</h3>
+                    <p>
+                        Upload your existing CV in PDF or DOCX format. Our system extracts and understands your experience.
+                    </p>
+                </div>
+
+                <div className="feature-card">
+                    <div className="feature-icon">📄</div>
+                    <span className="feature-step">Step 2</span>
+                    <h3>Paste Job Description</h3>
+                    <p>
+                        Simply copy and paste the job description here. Include the full job posting with responsibilities
+                        and requirements.
+                    </p>
+                </div>
+
+                <div className="feature-card">
+                    <div className="feature-icon">✨</div>
+                    <span className="feature-step">Step 3</span>
+                    <h3>AI Tailoring</h3>
+                    <p>
+                        Our AI rewrites your CV to highlight relevant skills and match ATS requirements for the role.
+                    </p>
+                </div>
+
+                <div className="feature-card">
+                    <div className="feature-icon">⬇️</div>
+                    <span className="feature-step">Step 4</span>
+                    <h3>Download & Apply</h3>
+                    <p>
+                        Preview your tailored CV and download it as a polished PDF ready for your application.
+                    </p>
+                </div>
             </div>
         </section>
-    );
-}
-
-
-function Footer() {
-    return (
-        <footer className="footer">
-            <div>LOGO</div>
-            <div className="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-            </div>
-            <div className="copyright">© 2026 NameEnterprise. All rights reserved.</div>
-        </footer>
     );
 }
