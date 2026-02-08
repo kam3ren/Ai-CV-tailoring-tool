@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CVUpload from "../components/CVUpload";
 import JobDescription from "../components/JobDescription";
-
+import CustomizePrompt from "../components/AIprompt";
 
 export default function Upload() {
     const [file, setFile] = useState(() => {
@@ -70,7 +70,10 @@ export default function Upload() {
     
                     <main className="content">
                         <div className="split">
-                            <CVUpload file={file} setFile={setFile} storageError={storageError} />
+                            <div className="upload-section">
+                                <CVUpload file={file} setFile={setFile} storageError={storageError} />
+                                <CustomizePrompt />
+                            </div>
                             <JobDescription jobDesc={jobDesc} setJobDesc={setJobDesc} />
                         </div>
                     </main>

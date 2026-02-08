@@ -36,7 +36,8 @@ export default function JobDescription({ jobDesc, setJobDesc }) {
       <h2>Job Description</h2>
       <textarea
         className="job-textarea"
-        placeholder="Enter the job description you want to tailor your CV for."
+        placeholder="Enter the job description you want to tailor your CV for.
+Include Job title, Responsibilities, Qualifications and Skills needed."
         value={jobDesc}
         onChange={(e) => setJobDesc(e.target.value)}
         rows={8}
@@ -45,7 +46,9 @@ export default function JobDescription({ jobDesc, setJobDesc }) {
         className="char-count"
         style={{ color: (jobDesc?.length || 0) < 150 ? "#ef4444" : undefined }}
       >
-        {jobDesc?.length || 0} characters
+        {(jobDesc?.length || 0) < 150
+          ? `${150 - (jobDesc?.length || 0)} more characters needed`
+          : `${jobDesc?.length || 0} characters`}
       </div>
       <div className="job-actions">
         <button className="btn primary" onClick={handleAnalyze} disabled={!jobDesc || jobDesc.length < 150}>Analyze</button>
