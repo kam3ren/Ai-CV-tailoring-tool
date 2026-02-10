@@ -522,3 +522,141 @@ body.dark-mode .upload-dropzone.dragging {
     50% { border-color: #60a5fa; transform: scale(1.01); }
     100% { border-color: #2563eb; transform: scale(1); }
 }
+
+/* =========================
+   UPLOAD ERROR STATES
+========================= */
+
+.upload-dropzone.uploading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.upload-error {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid #fee2e2;
+    border-radius: 8px;
+    background: #fef2f2;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.upload-error .error-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.upload-error .error-content {
+    flex: 1;
+}
+
+.upload-error .error-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #dc2626;
+}
+
+.upload-error .error-message {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.85rem;
+    color: #991b1b;
+    line-height: 1.4;
+}
+
+.upload-error .error-action {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #7f1d1d;
+    font-style: italic;
+}
+
+.upload-error .retry-btn {
+    flex-shrink: 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+}
+
+.upload-error .retry-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Dark mode - Upload Error */
+body.dark-mode .upload-error {
+    border-color: #7f1d1d;
+    background: #7f1d1d;
+}
+
+body.dark-mode .upload-error .error-title {
+    color: #fca5a5;
+}
+
+body.dark-mode .upload-error .error-message {
+    color: #fed7d7;
+}
+
+body.dark-mode .upload-error .error-action {
+    color: #f8d7da;
+}
+
+/* =========================
+   UPLOAD SUCCESS STATE
+========================= */
+
+.upload-success {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    background: #f0f9ff;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.upload-success .success-icon {
+    font-size: 1.25rem;
+    color: #059669;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.upload-success .success-content {
+    flex: 1;
+}
+
+.upload-success .success-text {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #0369a1;
+}
+
+.upload-success .success-meta {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #0c4a6e;
+}
+
+/* Dark mode - Upload Success */
+body.dark-mode .upload-success {
+    border-color: #064e3b;
+    background: #064e3b;
+}
+
+body.dark-mode .upload-success .success-icon {
+    color: #6ee7b7;
+}
+
+body.dark-mode .upload-success .success-text {
+    color: #86efac;
+}
+
+body.dark-mode .upload-success .success-meta {
+    color: #dcfce7;
+}

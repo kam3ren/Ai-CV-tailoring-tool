@@ -8,6 +8,7 @@ import JobDescription from "../components/JobDescription";
 import CustomizePrompt from "../components/AIprompt";
 
 export default function Upload() {
+    // CV file state with session storage persistence
     const [file, setFile] = useState(() => {
         const savedFile = sessionStorage.getItem("cvFile");
         if (savedFile) {
@@ -30,16 +31,30 @@ export default function Upload() {
         return null;
     });
 
+    // Uploaded file metadata from backend
+    const [uploadedFileData, setUploadedFileData] = useState(() => {
+        const saved = sessionStorage.getItem("uploadedFileData");
+        return saved ? JSON.parse(saved) : null;
+    });
+
     const [storageError, setStorageError] = useState(false);
 
+    // Job description state
     const [jobDesc, setJobDesc] = useState(() => {
         return sessionStorage.getItem("jobDesc") || "";
     });
 
+    // Track if CV upload was successful
+    const [cvUploadSuccess, setCvUploadSuccess] = useState(() => {
+        return sessionStorage.getItem("cvUploadSuccess") === "true";
+    });
+
+    // Persist job description
     useEffect(() => {
         sessionStorage.setItem("jobDesc", jobDesc);
     }, [jobDesc]);
 
+    // Persist CV file and metadata
     useEffect(() => {
         if (file) {
             const reader = new FileReader();
@@ -64,20 +79,59 @@ export default function Upload() {
         }
     }, [file]);
 
+    // Persist upload success flag
+    useEffect(() => {
+        sessionStorage.setItem("cvUploadSuccess", cvUploadSuccess.toString());
+    }, [cvUploadSuccess]);
+
+    // Handle successful CV upload
+    const handleCVUploadSuccess = (uploadedFile, fileData) => {
+        setUploadedFileData(fileData);
+        try {
+            sessionStorage.setItem("uploadedFileData", JSON.stringify(fileData));
+        } catch (e) {
+            console.warn("Could not save file metadata to session storage");
+        }
+        setCvUploadSuccess(true);
+    };
+
+    // Check if form is ready for generation
+    const isFormComplete = file && jobDesc.trim().length >= 150 && cvUploadSuccess;
+
     return (
-    <div className="page">
-                <Navbar actionButton={<button className="btn primary" disabled={!file || !jobDesc.trim()}>Generate CV</button>} />
-    
-                    <main className="content">
-                        <div className="split">
-                            <div className="upload-section">
-                                <CVUpload file={file} setFile={setFile} storageError={storageError} />
-                                <CustomizePrompt />
-                            </div>
-                            <JobDescription jobDesc={jobDesc} setJobDesc={setJobDesc} />
-                        </div>
-                    </main>
-                <Footer />
-            </div>
+        <div className="page">
+            <Navbar 
+                actionButton={
+                    <button 
+                        className="btn primary" 
+                        disabled={!isFormComplete}
+                        title={
+                            !file ? "Please upload your CV" :
+                            !cvUploadSuccess ? "Your CV is being validated. Please wait." :
+                            jobDesc.trim().length < 150 ? `Please enter at least 150 characters in the job description (${jobDesc.trim().length}/150)` :
+                            "Generate tailored CV"
+                        }
+                    >
+                        Generate CV
+                    </button>
+                } 
+            />
+
+            <main className="content">
+                <div className="split">
+                    <div className="upload-section">
+                        <CVUpload 
+                            file={file} 
+                            setFile={setFile} 
+                            storageError={storageError}
+                            onUploadSuccess={handleCVUploadSuccess}
+                        />
+                        <CustomizePrompt />
+                    </div>
+                    <JobDescription jobDesc={jobDesc} setJobDesc={setJobDesc} />
+                </div>
+            </main>
+            <Footer />
+        </div>
     );
 }
