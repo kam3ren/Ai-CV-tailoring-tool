@@ -8,7 +8,10 @@
       "dest": "backend/api/$1.py"
     },
     {
-      "src": "/(.*)",
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
       "dest": "/index.html"
     }
   ]
