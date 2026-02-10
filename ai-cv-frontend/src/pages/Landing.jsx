@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./landing.css";
+import "./Landing.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
