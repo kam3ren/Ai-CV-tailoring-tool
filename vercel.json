@@ -1,0 +1,49 @@
+{
+  "buildCommand": "npm install --prefix ai-cv-frontend && pip install -r requirements.txt",
+  "outputDirectory": "ai-cv-frontend/dist",
+  "env": {
+    "PYTHONPATH": "/var/task"
+  },
+  "functions": {
+    "backend/api/health.py": {
+      "runtime": "python3.11"
+    },
+    "backend/api/analyze_cv.py": {
+      "runtime": "python3.11",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/health",
+      "destination": "/backend/api/health.py"
+    },
+    {
+      "source": "/api/analyze_cv",
+      "destination": "/backend/api/analyze_cv.py"
+    },
+    {
+      "source": "/api/upload-cv",
+      "destination": "/backend/api/analyze_cv.py"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        }
+      ]
+    }
+  ]
+}
